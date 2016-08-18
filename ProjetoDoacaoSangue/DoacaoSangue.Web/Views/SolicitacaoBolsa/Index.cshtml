@@ -1,0 +1,54 @@
+﻿@using DoacaoSangue.Web.Models;
+@model IEnumerable<SolicitacaoBolsaModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Solicitações de Bolsas de Sangue</h2>
+<p>
+    @Html.ActionLink("Nova Solicitação", "")
+</p>
+<table class="table">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.UnidadeHospitalar)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.DataSolicitacao)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.Motivo)
+        </th>
+        <th class="text-center hidden-xs">
+            @Html.DisplayNameFor(model => model.IsAtendida)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td class="text-center">
+            @item.UnidadeHospitalar
+        </td>
+        <td class="text-center">
+            @item.DataSolicitacao.ToString("dd/MM/yy HH:mm")
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.Quantidade) L
+        </td>
+        <td class="hidden-xs">
+            @Html.DisplayFor(modelItem => item.Motivo)
+        </td>
+        <td class="text-center hidden-xs">
+            @Html.DisplayFor(modelItem => item.IsAtendida)
+        </td>
+        <td>
+            @Html.ActionLink("Atender", "Edit", new {id = item.Id})
+        </td>
+    </tr>
+}
+</table>

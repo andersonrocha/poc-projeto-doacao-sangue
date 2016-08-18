@@ -3,3 +3,9 @@
 ################################################################################
 
 /ProjetoDoacaoSangue/DoacaoSangue.Api/bin
+/ProjetoDoacaoSangue/DoacaoSangue.Api/obj/Debug
+/ProjetoDoacaoSangue/DoacaoSangue.AuthServerApi/bin
+/ProjetoDoacaoSangue/DoacaoSangue.AuthServerApi/obj/Debug
+/ProjetoDoacaoSangue/DoacaoSangue.Web/bin
+/ProjetoDoacaoSangue/DoacaoSangue.Web/obj/Debug
+/ProjetoDoacaoSangue/packages
