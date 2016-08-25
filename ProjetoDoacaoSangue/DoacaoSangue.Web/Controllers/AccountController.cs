@@ -19,6 +19,8 @@ namespace DoacaoSangue.Web.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            UserManager.Logoff(Session, Response);
+
             return View(new LoginModel());
         }
 

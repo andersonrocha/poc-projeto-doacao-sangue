@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net.Configuration;
 using System.Net.Http;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -16,27 +17,14 @@ namespace DoacaoSangue.Web.Infra
         public static bool ValidateUser(LoginModel logon, HttpResponseBase response)
         {
             bool result = false;
+            User user = UserManager.AuthenticateUser(logon.EmailUsuario, logon.Senha);
 
-            if (Membership.ValidateUser(logon.EmailUsuario, logon.Senha))
+            if (user != null)
             {
-                // Create the authentication ticket with custom user data.
                 var serializer = new JavaScriptSerializer();
-                string userData = serializer.Serialize(UserManager.User);
+                string userData = serializer.Serialize(user);
 
-                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
-                        logon.EmailUsuario,
-                        DateTime.Now,
-                        DateTime.Now.AddDays(30),
-                        true,
-                        userData,
-                        FormsAuthentication.FormsCookiePath);
-
-                // Encrypt the ticket.
-                string encTicket = FormsAuthentication.Encrypt(ticket);
-
-                // Create the cookie.
-                response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
-
+                response.Cookies.Add(TicketHelper.CreateAuthCookie(logon.EmailUsuario, userData, true));
                 result = true;
             }
 

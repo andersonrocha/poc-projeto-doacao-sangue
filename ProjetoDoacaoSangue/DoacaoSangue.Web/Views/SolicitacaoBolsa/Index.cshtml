@@ -2,12 +2,17 @@
 @model IEnumerable<SolicitacaoBolsaModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Solicitações";
 }
 
-<h2>Solicitações de Bolsas de Sangue</h2>
+<h2>Solicitações de Bolsas de Sangue
+    @if (!string.IsNullOrEmpty(ViewBag.NomeHospital))
+    {
+        <span class="small">@ViewBag.NomeHospital</span>
+    }
+</h2>
 <p>
-    @Html.ActionLink("Nova Solicitação", "")
+    @Html.ActionLink("Nova Solicitação", "NovaSolicitacao")
 </p>
 <table class="table">
     <tr>
@@ -47,7 +52,7 @@
             @Html.DisplayFor(modelItem => item.IsAtendida)
         </td>
         <td>
-            @Html.ActionLink("Atender", "Edit", new {id = item.Id})
+            @Html.ActionLink("Ver", "Visualizar", new {id = item.Id})
         </td>
     </tr>
 }

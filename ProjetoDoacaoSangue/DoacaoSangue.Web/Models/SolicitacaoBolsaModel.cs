@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,6 @@ namespace DoacaoSangue.Web.Models
         [Display(Name = "Data Solicitação")]
         public DateTime DataSolicitacao { get; set; }
         [Display(Name = "Unidade Hospitalar")]
-        [Required]
         public UnidadeHospitalar UnidadeHospitalar { get; set; }
         [Display(Name = "Nome do Paciente")]
         [Required]
@@ -34,13 +34,21 @@ namespace DoacaoSangue.Web.Models
 
     public enum TipoSanguineo
     {
+        [Description("A+")]
         APositivo,
+        [Description("A-")]
         ANegativo,
+        [Description("B+")]
         BPositivo,
+        [Description("B-")]
         BNegativo,
+        [Description("AB+")]
         ABPositivo,
+        [Description("AB-")]
         ABNegativo,
+        [Description("O+")]
         OPositivo,
+        [Description("O-")]
         ONegativo,
     }
 

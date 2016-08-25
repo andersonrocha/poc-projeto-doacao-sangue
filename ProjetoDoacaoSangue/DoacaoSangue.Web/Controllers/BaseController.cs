@@ -10,6 +10,6 @@ namespace DoacaoSangue.Web.Controllers
     public class BaseController : Controller
     {
         public MyPrincipal CurrentUser => (MyPrincipal)User;
-        public string AuthToken => CurrentUser.User.JwtToken;
+        public string AuthToken => CurrentUser.User?.JwtToken;
     }
 }

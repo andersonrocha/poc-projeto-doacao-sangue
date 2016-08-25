@@ -28,8 +28,8 @@ namespace DoacaoSangue.AuthServerApi.Repositorio
                                 {
                                     ClientId = ConfigurationManager.AppSettings["AudienceTest:ClientId"],
                                     Id = "Laboratorio02",
-                                    Email = "laboratorio01@doacaosangue.com",
-                                    Senha = "laboratorio01",
+                                    Email = "laboratorio02@doacaosangue.com",
+                                    Senha = "laboratorio02",
                                     Roles = "Laboratorio"
                                 });
             UsuariosList.TryAdd("hospital01@doacaosangue.com",

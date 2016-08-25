@@ -41,7 +41,7 @@ namespace DoacaoSangue.Api.Repositorio
             });
             _solicitacoesBolsasList.Add(new SolicitacaoBolsa
             {
-                Id = 2,
+                Id = 3,
                 UnidadeHospitalar = UnidadeHospitalar.Hospital01,
                 DataSolicitacao = DateTime.Now.AddDays(-1),
                 NomePaciente = "José Antônio",
@@ -51,7 +51,7 @@ namespace DoacaoSangue.Api.Repositorio
             });
             _solicitacoesBolsasList.Add(new SolicitacaoBolsa
             {
-                Id = 2,
+                Id = 4,
                 UnidadeHospitalar = UnidadeHospitalar.Hospital02,
                 DataSolicitacao = DateTime.Now.AddHours(-4),
                 NomePaciente = "Marieta Joaquina",
@@ -69,6 +69,11 @@ namespace DoacaoSangue.Api.Repositorio
                             .OrderBy(x => x.DataSolicitacao);
 
             return _solicitacoesBolsasList.OrderBy(x => x.DataSolicitacao);
+        }
+
+        public static SolicitacaoBolsa ObterSolicitacao(int id)
+        {
+            return _solicitacoesBolsasList.FirstOrDefault(x => x.Id == id);
         }
 
         public static void AdicionarSolicitacao(SolicitacaoBolsa solicitacaoBolsa)

@@ -63,14 +63,27 @@ namespace DoacaoSangue.AuthServerApi.Providers
             identity.AddClaim(new Claim(ClaimTypes.Role, usuario.Roles));
 
             var props = new AuthenticationProperties(new Dictionary<string, string>
+            {
                 {
-                    {
-                         "audience", context.ClientId ?? string.Empty
-                    }
-                });
+                    "audience", context.ClientId ?? string.Empty
+                },
+                {
+                    "id", usuario.Id
+                }
+            });
 
             var ticket = new AuthenticationTicket(identity, props);
             context.Validated(ticket);
+
+            return Task.FromResult<object>(null);
+        }
+
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)
+            {
+                context.AdditionalResponseParameters.Add(property.Key, property.Value);
+            }
 
             return Task.FromResult<object>(null);
         }

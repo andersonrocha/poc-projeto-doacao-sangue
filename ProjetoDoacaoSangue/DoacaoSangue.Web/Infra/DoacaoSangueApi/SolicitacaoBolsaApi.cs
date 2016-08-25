@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Security.Authentication;
 using System.Web;
 using DoacaoSangue.Web.Models;
 using RestSharp;
@@ -36,6 +38,13 @@ namespace DoacaoSangue.Web.Infra.DoacaoSangueApi
                 throw apiException;
             }
 
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                const string message = "Token expirado.";
+                var authException = new AuthenticationException(message);
+                throw authException;
+            }
+
             return response.Data;
         }
 
@@ -46,6 +55,16 @@ namespace DoacaoSangue.Web.Infra.DoacaoSangueApi
             request.RootElement = "SolicitacaoBolsaModel";
 
             return Execute<List<SolicitacaoBolsaModel>>(request);
+        }
+
+        public SolicitacaoBolsaModel GetSolicitacao(int id)
+        {
+            var request = new RestRequest();
+            request.Resource = "solicitacaobolsa/{id}";
+            request.RootElement = "SolicitacaoBolsaModel";
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+
+            return Execute<SolicitacaoBolsaModel>(request);
         }
 
         public void AddSolicitacao(SolicitacaoBolsaModel solicitacao)
@@ -64,11 +83,10 @@ namespace DoacaoSangue.Web.Infra.DoacaoSangueApi
         {
             var request = new RestRequest(Method.PUT);
             request.RequestFormat = DataFormat.Json;
-            request.Resource = "solicitacaobolsa/{id}/atender";
+            request.Resource = "solicitacaobolsa/atender";
             request.RootElement = "SolicitacaoBolsaModel";
 
-            request.AddParameter("id", idSolicitacao, ParameterType.UrlSegment);
-            request.AddJsonBody(new { laboratorio });
+            request.AddJsonBody(new { id = idSolicitacao, laboratorio });
 
             Execute<SolicitacaoBolsaModel>(request);
         }   

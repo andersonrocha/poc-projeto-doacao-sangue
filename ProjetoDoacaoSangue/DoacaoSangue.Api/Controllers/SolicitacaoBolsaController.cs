@@ -38,8 +38,16 @@ namespace DoacaoSangue.Api.Controllers
             return SolicitacaoBolsaRespositorio.ObterSolicitacoes((UnidadeHospitalar)Enum.Parse(typeof(UnidadeHospitalar), IdUsuario));
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Laboratorio, Hospital")]
+        [Route("{id:int}")]
+        public SolicitacaoBolsa Get(int id)
+        {
+            return SolicitacaoBolsaRespositorio.ObterSolicitacao(id);
+        }
+
         [HttpPut]
-        [Route("{id}/atender")]
+        [Route("atender")]
         [Authorize(Roles = "Laboratorio")]
         public IHttpActionResult PutAtenderSolicitacao(AtenderSolicitacaoBolsaModel model)
         {

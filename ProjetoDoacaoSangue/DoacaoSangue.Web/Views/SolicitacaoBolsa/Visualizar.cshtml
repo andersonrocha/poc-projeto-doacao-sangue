@@ -1,0 +1,102 @@
+﻿@model DoacaoSangue.Web.Models.SolicitacaoBolsaModel
+
+@{
+    ViewBag.Title = $"Solicitação {Model.Id}";
+}
+
+<h2>Solicitação @Model.Id</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UnidadeHospitalar)
+        </dt>
+
+        <dd>
+            @Model.UnidadeHospitalar.ToString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataSolicitacao)
+        </dt>
+
+        <dd>
+            @Model.DataSolicitacao.ToString("dd/MM/yyyy HH:mm")h
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomePaciente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomePaciente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Motivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Motivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAtendida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAtendida)
+        </dd>
+
+        @if (Model.IsAtendida)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.DataAtendimento)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataAtendimento)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LaboratorioAtendeu)
+            </dt>
+
+            <dd>
+                @Model.LaboratorioAtendeu.ToString()
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @if (!Model.IsAtendida && string.IsNullOrEmpty(ViewBag.NomeHospital))
+    {
+        <button type="button" id="btn-atender" class="btn btn-primary" data-id="@Model.Id"><i class="fa fa-check"></i> Atender Solicitação</button>
+    }
+    @Html.ActionLink("Voltar para a lista", "Index")
+</p>
+@section script{
+    <script type="text/javascript">
+        $(document)
+            .ready(function() {
+                $("#btn-atender")
+                    .click(function(e) {
+                        if (confirm('Deseja atender a solicitação de bolsa de sangue?')) {
+                            $.post("@Url.Action("Atender")",
+                                { id: $(this).data().id },
+                                function(result) {
+                                    location.href = "@Url.Action("Index")";
+                                });
+                        }
+                    });
+            });
+    </script>
+}
