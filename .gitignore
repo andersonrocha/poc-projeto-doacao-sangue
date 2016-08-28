@@ -9,3 +9,9 @@
 /ProjetoDoacaoSangue/DoacaoSangue.Web/bin
 /ProjetoDoacaoSangue/DoacaoSangue.Web/obj/Debug
 /ProjetoDoacaoSangue/packages
+/ProjetoDoacaoSangue/DoacaoSangue.Api/obj/Release
+/ProjetoDoacaoSangue/DoacaoSangue.AuthServerApi/obj/Release
+/ProjetoDoacaoSangue/DoacaoSangue.LoadTest/bin/Debug
+/ProjetoDoacaoSangue/DoacaoSangue.LoadTest/obj
+/ProjetoDoacaoSangue/DoacaoSangue.Web/obj/Release
+/ProjetoDoacaoSangue/TestResults

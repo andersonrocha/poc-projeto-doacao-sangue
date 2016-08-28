@@ -9,7 +9,7 @@ namespace DoacaoSangue.Web.Infra
         public static HttpCookie CreateAuthCookie(string userName, string userData, bool persistent)
         {
             DateTime issued = DateTime.Now;
-            int formsTimeout = FormsAuthentication.Timeout.Minutes;
+            var formsTimeout = FormsAuthentication.Timeout.TotalMinutes;
 
             DateTime expiration = DateTime.Now.AddMinutes(formsTimeout);
             string cookiePath = FormsAuthentication.FormsCookiePath;

@@ -43,7 +43,10 @@ namespace DoacaoSangue.Api.Controllers
         [Route("{id:int}")]
         public SolicitacaoBolsa Get(int id)
         {
-            return SolicitacaoBolsaRespositorio.ObterSolicitacao(id);
+            if (User.IsInRole("Laboratorio"))
+                return SolicitacaoBolsaRespositorio.ObterSolicitacao(id);
+
+            return SolicitacaoBolsaRespositorio.ObterSolicitacao(id, (UnidadeHospitalar)Enum.Parse(typeof(UnidadeHospitalar), IdUsuario));
         }
 
         [HttpPut]

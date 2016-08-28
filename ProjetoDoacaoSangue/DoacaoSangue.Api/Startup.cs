@@ -29,7 +29,7 @@ namespace DoacaoSangue.Api
 
         public void ConfigureOAuth(IAppBuilder app)
         {
-            var issuerAuthServer = "http://localhost/DoacaoSangue.AuthServerApi";
+            var issuerAuthServer = ConfigurationManager.AppSettings["AuthServer:Issuer"];
             var audience = ConfigurationManager.AppSettings["AuthServer:AudienceId"];
             var secret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["AuthServer:Base64Secret"]);
 

@@ -28,7 +28,7 @@ namespace DoacaoSangue.Web
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/login").Include(
+            bundles.Add(new StyleBundle("~/Content/signin").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/signin.css"));
         }

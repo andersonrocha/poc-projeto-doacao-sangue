@@ -71,8 +71,11 @@ namespace DoacaoSangue.Api.Repositorio
             return _solicitacoesBolsasList.OrderBy(x => x.DataSolicitacao);
         }
 
-        public static SolicitacaoBolsa ObterSolicitacao(int id)
+        public static SolicitacaoBolsa ObterSolicitacao(int id, UnidadeHospitalar? unidadeHospitalar = null)
         {
+            if (unidadeHospitalar.HasValue)
+                return _solicitacoesBolsasList.FirstOrDefault(x => x.Id == id && x.UnidadeHospitalar == unidadeHospitalar.Value);
+
             return _solicitacoesBolsasList.FirstOrDefault(x => x.Id == id);
         }
 
@@ -86,7 +89,7 @@ namespace DoacaoSangue.Api.Repositorio
 
         public static bool AtenderSolicitacao(int idSolicitacao, Laboratorio laboratorio)
         {
-            var solicitacao = _solicitacoesBolsasList.First(x => x.Id == idSolicitacao);
+            var solicitacao = _solicitacoesBolsasList.First(x => x.Id == idSolicitacao && !x.IsAtendida);
 
             if (solicitacao == null)
                 return false;
